@@ -78,3 +78,24 @@ def handle_missing_values(df: pd.DataFrame) -> pd.DataFrame:
 		mean_value = df[col].mean()
 		df[col] = df[col].fillna(mean_value)
 	return df		
+
+#Had copilot write if __name__ == "__main__": block
+if __name__ == "__main__":
+	# Example usage
+	file_path = "data/raw/data.csv"
+	df = load_data(file_path)
+	df = clean_column_names(df)
+	df = strip_whitespace_from_strings(df)
+	df = handle_missing_values(df)
+	df = remove_invalid_rows(df)
+	print(df.head())	
+def main():
+	# Example usage
+	file_path = "data/raw/data.csv"
+	df = load_data(file_path)
+	df = clean_column_names(df)
+	df = strip_whitespace_from_strings(df)
+	df = handle_missing_values(df)
+	df = remove_invalid_rows(df)
+	print(df.head())
+	main()
