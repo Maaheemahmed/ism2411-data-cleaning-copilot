@@ -34,6 +34,19 @@ def remove_invalid_rows(df: pd.DataFrame) -> pd.DataFrame:
 	"""
 	return df[(df['price'] >= 0) & (df['quantity'] >= 0)]
 
+def clean_column_names(df: pd.DataFrame) -> pd.DataFrame:
+    """Standardize column names."""
+    df = df.copy()
+    df.columns = (
+        df.columns
+        .str.strip()
+        .str.lower()
+        .str.replace(" ", "_")
+    )
+    return df
+
+
+
 if __name__ == "__main__":
 	raw_path = "data/raw/sales_data_raw.csv"
 	df = load_data(raw_path)
