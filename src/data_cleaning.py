@@ -1,4 +1,4 @@
-"""Data cleaning pipeline starter for ISM2411.
+"""Data cleaning for ISM2411.
 
 This file is a minimal skeleton you can build from. Add functions such as
 `clean_column_names`, `strip_whitespace_from_strings`, `handle_missing_values`,
@@ -21,6 +21,18 @@ def load_data(file_path: str) -> pd.DataFrame:
 	"""
 	return pd.read_csv(file_path)
 
+# This function should remove rows where price or quantity is negative.
+# Copilot: write this function.
+def remove_invalid_rows(df: pd.DataFrame) -> pd.DataFrame:
+	"""Remove rows with invalid data.
+
+	Args:
+		df: Input DataFrame.
+
+	Returns:
+		DataFrame with invalid rows removed.
+	"""
+	return df[(df['price'] >= 0) & (df['quantity'] >= 0)]
 
 if __name__ == "__main__":
 	raw_path = "data/raw/sales_data_raw.csv"
