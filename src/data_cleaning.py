@@ -45,11 +45,36 @@ def clean_column_names(df: pd.DataFrame) -> pd.DataFrame:
     )
     return df
 
+#This function should strip whitespace from string columns.
+# Copilot: write this function.
+def strip_whitespace_from_strings(df: pd.DataFrame) -> pd.DataFrame:
+	"""Strip leading and trailing whitespace from string columns.
 
+	Args:
+		df: Input DataFrame.
+	Returns:
+		DataFrame with whitespace stripped from string columns.
+	"""
+	df = df.copy()
+	str_cols = df.select_dtypes(include=['object']).columns
+	for col in str_cols:
+		df[col] = df[col].str.strip()
+	return df	
 
-if __name__ == "__main__":
-	raw_path = "data/raw/sales_data_raw.csv"
-	df = load_data(raw_path)
-	print(f"Loaded rows: {len(df)} from {raw_path}")
-	print(df.head())
+#This function should handle missing values by filling them with the column mean for numeric columns.
+# Copilot: write this function.
+def handle_missing_values(df: pd.DataFrame) -> pd.DataFrame:
+	"""Handle missing values in the DataFrame.
 
+	Args:
+		df: Input DataFrame.
+
+	Returns:
+		DataFrame with missing values handled.
+	"""
+	df = df.copy()
+	num_cols = df.select_dtypes(include=['number']).columns
+	for col in num_cols:
+		mean_value = df[col].mean()
+		df[col] = df[col].fillna(mean_value)
+	return df		
