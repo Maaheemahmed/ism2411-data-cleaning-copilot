@@ -79,23 +79,29 @@ def handle_missing_values(df: pd.DataFrame) -> pd.DataFrame:
 		df[col] = df[col].fillna(mean_value)
 	return df		
 
-#Had copilot write if __name__ == "__main__": block
+
+# The corrected execution block
 if __name__ == "__main__":
-	# Example usage
-	file_path = "data/raw/data.csv"
-	df = load_data(file_path)
-	df = clean_column_names(df)
-	df = strip_whitespace_from_strings(df)
-	df = handle_missing_values(df)
-	df = remove_invalid_rows(df)
-	print(df.head())	
-def main():
-	# Example usage
-	file_path = "data/raw/data.csv"
-	df = load_data(file_path)
-	df = clean_column_names(df)
-	df = strip_whitespace_from_strings(df)
-	df = handle_missing_values(df)
-	df = remove_invalid_rows(df)
-	print(df.head())
-	main()
+    # Define file paths
+    raw_path = "data/raw/sales_data_raw.csv" 
+    cleaned_path = "data/processed/sales_data_clean.csv"
+
+    # ------------------------------------------------------------------
+    # What: Execute the full data cleaning.
+    # ------------------------------------------------------------------
+    
+    print("--- Starting Data Cleaning Pipeline ---")
+    
+    # Load and clean the data 
+    df_raw = load_data(raw_path)
+    df_clean = clean_column_names(df_raw)
+    df_clean = strip_whitespace_from_strings(df_clean)
+    df_clean = handle_missing_values(df_clean) 
+    df_clean = remove_invalid_rows(df_clean)
+    
+    # Save the clean data
+    df_clean.to_csv(cleaned_path, index=False)
+    
+    print("Cleaning complete. First few rows:")
+    print(df_clean.head())
+    print(f"\nCleaned data saved to: {cleaned_path}")
